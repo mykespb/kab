@@ -1,2 +1,2 @@
 # kab
-Komputer Bards Archive project
+Komputer Archive of Bards project
