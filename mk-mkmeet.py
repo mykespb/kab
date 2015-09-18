@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# mk-mkmeet.py 2015-09-18 2015-09-19 1.3
+# mk-mkmeet.py 2015-09-18 2015-09-19 1.4
 # (C) Mikhail Kolodin, 2015
 # format bards songs file with simplest markdown into web page for easy searching and singing
 # call:    mk-mkmeet.py file.txt
@@ -12,9 +12,9 @@ import sys, pprint
 ver = '1.2'
 adate = '2015-09-19'
 
-#~ inname = None
-inname  = "all-2015fall.txt"
-outname = "all-2015fall.html"
+inname = outname = None
+#inname  = "all-2015fall.txt"
+#outname = "all-2015fall.html"
 
 #index
 index = []   # all songs list
