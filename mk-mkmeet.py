@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# mk-mkmeet.py 2015-09-18 2015-09-19 1.4
+# mk-mkmeet.py 2015-09-18 2015-10-11 1.5
 # (C) Mikhail Kolodin, 2015
 # format bards songs file with simplest markdown into web page for easy searching and singing
 # call:    mk-mkmeet.py file.txt
@@ -104,17 +104,20 @@ def pass2 ():
         snum = 0
         row = 0
         with open (inname) as infile:
-            was = ""
+            was = wass = ""
             cwas = 0
+            dout = 0
             for line in infile:
                 if line.startswith("===="):
                     # we have file title
+                    dout = 0
                     title = was.strip()
                     print ("file: %s" % (title,))
                     continue
 
                 if line.startswith("----"):
                     # we have song title
+                    dout = 1
                     full = was.strip()
                     print ("song: %s." % (full,))
                     snum += 1
@@ -124,17 +127,21 @@ def pass2 ():
                     print ("<a name='%d'>" % (snum,), file=outfile)
                     print ("<p><b>%s.</b></p>" % (full,), file=outfile)
 
-                    print ("\n<div>\n<table border=0 frame=void rules=cols  cellpadding=5mm  ><tr><td align=left valign=top  cellpadding=5mm>", file=outfile)
+                    print ("\n<div>\n<table border=0 frame=void rules=cols cellpadding=5mm  ><tr><td align=left valign=top cellpadding=5mm>", file=outfile)
                     row = 0
                     cwas = 1
 
                     print ("\n<pre>", file=outfile)
                     continue
 
+                if dout == 1:
+                    dout = 2
+
                 # normal line: pass
-                if was.strip() != title and was.strip() != full:
-                    if was.strip() != "" or cwas == 0:
+                if dout > 1 and (wass != title and wass != full):
+                    if wass != "" or cwas == 0:
                         print (was, file=outfile, end="")
+                        dout = 3
                         row += 1
                         if row == 30:
                             row = 0
@@ -146,8 +153,12 @@ def pass2 ():
                     else:
                         cwas = 0
 
+                elif dout >2 :
+                    print (was, file=outfile, end="")
+
                 # end of line
                 was = line
+                wass = was.strip()
 
         print ("""
 </pre>
