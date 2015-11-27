@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# br-getpers1.py 2015-11-27 1.3
+# br-getpers1.py 2015-11-27 1.4
 # get persons from web site bards.ru
 
 import lxml.html as lh
@@ -63,3 +63,9 @@ def main(args):
 if __name__ == '__main__':
     import sys
     sys.exit(main(sys.argv))
+
+# http://bards.ru/persons.php?ch=%C0
+# http://docs.python-guide.org/en/latest/scenarios/scrape/
+# http://lxml.de/xpathxslt.html
+# http://saxon.sourceforge.net/saxon6.5.3/expressions.html
+
