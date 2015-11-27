@@ -41,3 +41,6 @@ vostok-300800.sh
 win2utf
 перекодирование файла из кодировки windows cp1251 в универсальную utf8
 
+br-pers1.py
+bards.ru lxml parser 
+
