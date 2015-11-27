@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# br-getpers1.py 2015-11-27 1.4
+# br-getpers1.py.py 2015-11-27 1.5
 # get persons from web site bards.ru
 
 import lxml.html as lh
