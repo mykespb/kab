@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# mk-mkmeet.py 2016-01-06 2016-01-06 0.1
-# (C) Mikhail Kolodin, 2015
+# mk-mkmeet.py 2016-01-06 2016-01-06 1.0
+# (C) Mikhail Kolodin, 2016
 # format bards songs file with simplest markdown into web page for easy searching and singing
 # makes only 1 column
 # call:    mk-mkmeet.py file.txt
@@ -10,7 +10,7 @@
 import sys, pprint
 
 # version
-ver = '0.1'
+ver = '1.0'
 adate = '2016-01-06'
 
 COLS = 1    # only 1 column!
