@@ -4,7 +4,10 @@
 # repeat for all files in directory
 # no dubbing in renaming
 
-print "This is foto-mk-lc.pl 2011-02-07 1 by myke\n\n";
+print "This is foto-author-lc.pl 2016-01-14 0.1 by myke\n\n";
+
+$addname = shift;
+exit if $addname eq "";
 
 @fa = <*.jpg>;
 @fb = <*.JPG>;
@@ -19,7 +22,7 @@ foreach $f (sort keys %files) {print "$f -> ";
 
 	$fn = lc $f;
 	($name, $ext) = split (/\./, $fn);
-	$name .= '_myke' unless substr($name, -5) eq '_myke';
+	$name .= '_' . $addname;
 	$fnew = $name . '.' . $ext;
 
 	print "$fnew\n";
