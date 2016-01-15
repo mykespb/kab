@@ -1,10 +1,10 @@
 #!/usr/bin/env perl
-# myke foto-author-lc.pl 2016-01-14 0.1
+# myke foto-author-lc.pl 2016-01-14 1.0
 # make foto file name lowercase and add author's name to it
 # repeat for all files in directory
 # no dubbing in renaming
 
-print "This is foto-author-lc.pl 2016-01-14 0.1 by myke\n\n";
+print "This is foto-author-lc.pl 2016-01-14 1.0 by myke\n\n";
 
 $addname = shift;
 exit if $addname eq "";
