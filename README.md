@@ -44,3 +44,7 @@ win2utf
 br-pers1.py
 bards.ru lxml parser 
 
+foto-author-lc.pl
+add author's name to each jpg (JPG) file in directory
+run: foto-author-lc.pl _author_
+
