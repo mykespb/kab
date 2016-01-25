@@ -1,13 +1,13 @@
 #!/usr/bin/env perl
-# myke foto-author-lc.pl 2016-01-14 1.0
+# myke foto-author-lc.pl 2016-01-14 2016-01-25 1.1
 # make foto file name lowercase and add author's name to it
 # repeat for all files in directory
 # no dubbing in renaming
 
-print "This is foto-author-lc.pl 2016-01-14 1.0 by myke\n\n";
+print "This is foto-author-lc.pl 2016-01-14 2016-01-25 1.1 by myke\n\n";
 
-$addname = shift;
-exit if $addname eq "";
+$addname = shift || "myke";
+#:x$addname = "myke" if $addname eq "";
 
 @fa = <*.jpg>;
 @fb = <*.JPG>;
@@ -21,6 +21,7 @@ $n = 0;
 foreach $f (sort keys %files) {print "$f -> "; 
 
 	$fn = lc $f;
+	$fn =~ s/^-/_/;
 	($name, $ext) = split (/\./, $fn);
 	$name .= '_' . $addname;
 	$fnew = $name . '.' . $ext;
