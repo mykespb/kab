@@ -1,10 +1,10 @@
 #!/usr/bin/env perl
-# myke foto-mk-lc.pl 2011-02-07 1
+# myke foto-mk-lc.pl 2016-01-25 2.2
 # make foto file name lowercase 
 # repeat for all files in directory
 # no dubbing in renaming
 
-print "This is foto-mk-lc.pl 2011-02-07 2015-01-10 2.1 by myke\n\n";
+print "This is foto-mk-lc.pl 2011-02-07 2016-01-26 2.2 by myke\n\n";
 
 @fa = <*.jpg>;
 @fb = <*.JPG>;
@@ -18,6 +18,7 @@ $n = 0;
 foreach $f (sort keys %files) {print "$f -> "; 
 
 	$fn = lc $f;
+	$fn =~ s/^-/_/;
 	($name, $ext) = split (/\./, $fn);
 #	$name .= '_myke' unless substr($name, -5) eq '_myke';
 	$fnew = $name . '.' . $ext;
