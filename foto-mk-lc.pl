@@ -1,10 +1,11 @@
 #!/usr/bin/env perl
-# myke foto-mk-lc.pl 2011-02-07 2016-01-25 1.1
+# myke foto-mk-lc.pl 2011-02-07 2016-01-26 1.2
 # make foto file name lowercase and add '-myke' to it
 # repeat for all files in directory
 # no dubbing in renaming
+# 1st dash in file name becomes underscore
 
-print "This is foto-mk-lc.pl 2011-02-07 2016-01-25 1.1 by myke\n\n";
+print "This is foto-mk-lc.pl 2011-02-07 2016-01-26 1.2 by myke\n\n";
 
 @fa = <*.jpg>;
 @fb = <*.JPG>;
