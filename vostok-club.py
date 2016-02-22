@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# (C) Mikhail (myke) Kolodin 2016-01-22 1.1
+# (C) Mikhail (myke) Kolodin 2016-01-22 2016-02-22 1.2
 # convert downloaded vostok.tsv file to club.tab (utf8)
 
 import csv
@@ -19,6 +19,10 @@ with open(namein) as filein, open(nameout, "wt") as fileout:
         if rownum == 1:
             header = row
             orow = "file\tfname\tpname\tlname\tsex\tbd\tduty".split()
+            w.writerow (orow)
+        elif rownum == 2:
+            header = row
+            orow = "#файл\tfимя\tотчество\tфамилия\tпол\tДР\tдолжность".split()
             w.writerow (orow)
         else:
             orow = row[0], row[2], row[3], row[1], row[5], row[6], row[12]
