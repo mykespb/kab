@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# mk-mkmeet.py 2016-01-06 2016-01-07 1.1
+# mk-mkmeet.py 2016-01-06 2016-04-27 1.1
 # (C) Mikhail Kolodin, 2016
 # format bards songs file with simplest markdown into web page for easy searching and singing
 # makes only 1 column
 # call:    mk-mkmeet.py file.txt
 # result:  file.html (all in one)
 
-import sys, pprint
+import sys, pprint, re
 
 # version
 ver = '1.1'
-adate = '2016-01-07'
+adate = '2016-04-27'
+
+COLS = 1    # only 1 column!
 
 inname = outname = None
 #inname  = "all-2015fall.txt"
@@ -21,6 +23,10 @@ inname = outname = None
 index = []   # all songs list
 snum = 0     # song number
 title = ""   # file title
+
+def urly (tin):
+	""" make urls refs """
+	return re.sub (r'(https?://[-a-zA-Z0-9:/_%()?=+.,]+)', r'<a href="\1" target=song>\1</a>', tin)
 
 def main():
     """ main fun """
@@ -141,7 +147,7 @@ def pass2 ():
                 # normal line: pass
                 if dout > 1 and (wass != title and wass != full):
                     if wass != "" or cwas == 0:
-                        print (was, file=outfile, end="")
+                        print (urly(was), file=outfile, end="")
                         dout = 3
                         row += 1
                         #~ if row == 30:
@@ -155,7 +161,7 @@ def pass2 ():
                         cwas = 0
 
                 elif dout >2 :
-                    print (was, file=outfile, end="")
+                    print (urly(was), file=outfile, end="")
 
                 # end of line
                 was = line
