@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# mk-mkmeet.py 2016-01-06 2016-04-27 1.1
-# (C) Mikhail Kolodin, 2016
+# mk-mkmeet.py 2016-01-06 2017-11-24 1.3
+# (C) Mikhail Kolodin, 2016-2017
 # format bards songs file with simplest markdown into web page for easy searching and singing
 # makes only 1 column
 # call:    mk-mkmeet.py file.txt
@@ -10,8 +10,8 @@
 import sys, pprint, re
 
 # version
-ver = '1.1'
-adate = '2016-04-27'
+ver = '1.3'
+adate = '2017-11-24'
 
 COLS = 1    # only 1 column!
 
@@ -24,9 +24,12 @@ index = []   # all songs list
 snum = 0     # song number
 title = ""   # file title
 
+part = 0
+lino = 0
+
 def urly (tin):
 	""" make urls refs """
-	return re.sub (r'(https?://[-a-zA-Z0-9:/_%()?=+.,]+)', r'<a href="\1" target=song>\1</a>', tin)
+	return re.sub (r'(https?://[-a-zA-Z0-9:/_%()?=+.,#]+)', r'<a href="\1" target=song>\1</a>', tin)
 
 def main():
     """ main fun """
@@ -46,16 +49,21 @@ def main():
 
 def pass1 ():
     """collect index"""
-    global inname, outname, index, snum, title
+    global inname, outname, index, snum, title, lino, part
     full = ""
+    linefrom = 0
     print ("pass 1: making index")
     with open (inname) as infile:
+        lino = 0
         was = ""
         for line in infile:
+            lino += 1
+        	
             if line.startswith("===="):
                 # we have file title
                 title = was.strip()
                 print ("file: %s" % (title,))
+                linefrom = lino
                 continue
 
             if line.startswith("----"):
@@ -63,9 +71,14 @@ def pass1 ():
                 full = was.strip()
                 print ("song: %s." % (full,))
                 snum += 1
-                #~ index.append([snum, author, name, 0])
-                index.append([snum, full, 0])
+                index.append([snum, full, part, lino, 0])
                 continue
+
+            if line.startswith("#PART"):
+	            part = int(line[6:].strip())
+	            was = ""
+	            lino -= linefrom - 1
+	            continue
 
             # normal line
             if index:
@@ -104,8 +117,11 @@ def pass2 ():
                 #~ print ("\n</td></tr></table></div>\n\n<div><table frame=void rules=cols cellpadding=5mm ><tr>", file=outfile)
             #~ if onum % 30 == 0:
                 #~ print ("\n<td align=left valign=top>\n", file=outfile)
-            anum, afull, alen = song
-            print ("<div align=left valign=top><a href='#%d'>%03d. %s.</a> (%d)</div>" % (anum, anum, afull, alen), file=outfile)
+            anum, afull, part, lino, alen = song
+            if part:
+	            print ("<div align=left valign=top><a href='#%d'>%03d. %s.</a> (%d:%d+%d)</div>" % (anum, anum, afull, part, lino, alen), file=outfile)
+            else:
+	            print ("<div align=left valign=top><a href='#%d'>%03d. %s.</a> (%d+%d)</div>" % (anum, anum, afull, lino, alen), file=outfile)
         print ("\n</tr></table>\n</div>\n<br/ >\n", file=outfile)
 
         snum = 0
